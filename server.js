@@ -429,15 +429,25 @@ app.use((req, res) => {
 // =====================================================
 // START SERVER — connect to MongoDB then listen
 // =====================================================
-mongoose.connect(MONGO_URI)
-  .then(() => {
-    console.log('Connected to MongoDB');
+const startServer = () => {
+  return mongoose.connect(MONGO_URI)
+    .then(() => {
+      console.log('Connected to MongoDB');
+      return app;
+    });
+};
+
+// Only listen when run directly (not when imported by Vercel)
+if (require.main === module) {
+  startServer().then(() => {
     app.listen(PORT, () => {
       console.log(`Oktrek-style travel site running at http://localhost:${PORT}`);
       console.log(`Admin panel: http://localhost:${PORT}/admin/login`);
     });
-  })
-  .catch(err => {
+  }).catch(err => {
     console.error('MongoDB connection failed:', err.message);
     process.exit(1);
   });
+}
+
+module.exports = { app, startServer };
