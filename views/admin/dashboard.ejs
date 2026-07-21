@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/admin-head', { title: 'Dashboard' }) %></head>
+<body class="admin-body">
+<div class="admin-wrap">
+  <%- include('../partials/admin-sidebar', { active: 'dashboard' }) %>
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <h1>Dashboard</h1>
+    </div>
+
+    <div class="stat-cards">
+      <div class="stat-card"><div class="num"><%= stats.packages %></div><div class="label">Packages</div></div>
+      <div class="stat-card"><div class="num"><%= stats.enquiries %></div><div class="label">Total Enquiries</div></div>
+      <div class="stat-card"><div class="num"><%= stats.newEnquiries %></div><div class="label">New Enquiries</div></div>
+      <div class="stat-card"><div class="num"><%= stats.contacts %></div><div class="label">Contact Messages</div></div>
+    </div>
+
+    <div class="admin-card">
+      <h2 class="h5 mb-3">Recent Enquiries</h2>
+      <table class="admin-table">
+        <thead><tr><th>Name</th><th>Package</th><th>Phone</th><th>Status</th><th>Date</th></tr></thead>
+        <tbody>
+          <% if (!recentEnquiries.length) { %>
+            <tr><td colspan="5" class="text-muted">No enquiries yet.</td></tr>
+          <% } %>
+          <% recentEnquiries.forEach(function(e){ %>
+            <tr>
+              <td><%= e.name %></td>
+              <td><%= e.packageTitle %></td>
+              <td><%= e.phone %></td>
+              <td><span class="badge-status <%= e.status %>"><%= e.status %></span></td>
+              <td><%= new Date(e.createdAt).toLocaleDateString() %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <a href="/admin/enquiries" class="btn btn-admin btn-sm mt-3">View All Enquiries</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

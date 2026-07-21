@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<%- include('partials/nav') %>
+
+<!-- ===== 3D PARALLAX HERO ===== -->
+<div class="hero-parallax">
+  <% settings.heroImages.forEach(function(img, i) { %>
+    <div class="p3d-layer" data-depth="<%= 12 + i * 4 %>" style="background-image:url('<%= img %>');"></div>
+  <% }) %>
+  <div class="p3d-overlay"></div>
+  <div class="container p3d-content">
+    <div class="row no-gutters align-items-center">
+      <div class="col-md-8 ftco-animate text-white">
+        <span class="subheading" style="color:#F96D00; letter-spacing:2px; text-transform:uppercase; font-weight:600;">Adventure Awaits</span>
+        <h1 class="mb-3 mt-2" style="font-size:52px; font-weight:700; color:#fff;">Conquer The Heights</h1>
+        <p class="mb-4" style="font-size:19px; opacity:.9;">Where Every Step Tells a Story — guided Himalayan treks and yatra journeys with fixed departures and transparent pricing.</p>
+        <p>
+          <a href="/packages" class="btn btn-primary py-3 px-4 mr-2">Explore Treks</a>
+          <a href="/contact#inquiry" class="btn btn-outline-light py-3 px-4">Send Inquiry</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ===== END HERO ===== -->
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center pb-4">
+      <div class="col-md-8 heading-section text-center ftco-animate">
+        <span class="subheading">Featured Expeditions</span>
+        <h2 class="mb-4">Choose Your Adventure</h2>
+        <p>Handpicked Himalayan treks and yatra escapes guided by experts who live and breathe the mountains.</p>
+      </div>
+    </div>
+    <div class="row">
+      <% packages.forEach(function(pkg) { %>
+        <div class="col-md-4 ftco-animate">
+          <div class="project-wrap">
+            <a href="/packages/<%= pkg.id %>" class="img" style="background-image: url(<%= pkg.image %>);">
+              <span class="price">₹<%= pkg.price.toLocaleString('en-IN') %>/person</span>
+            </a>
+            <div class="text p-4">
+              <span class="days"><%= pkg.duration %> · <span class="badge-difficulty"><%= pkg.difficulty %></span></span>
+              <h3><a href="/packages/<%= pkg.id %>"><%= pkg.title %></a></h3>
+              <p class="location"><span class="fa fa-map-marker"></span> <%= pkg.location %></p>
+              <p class="rating"><span class="fa fa-star" style="color:#F96D00;"></span> <%= pkg.rating %> rating</p>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <a href="/packages" class="btn btn-primary py-3 px-5">View All Treks</a>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section ftco-about ftco-no-pt img" style="background-image: url(<%= settings.introBg %>);">
+  <div class="overlay"></div>
+  <div class="container py-md-5">
+    <div class="row py-md-5 justify-content-center text-center">
+      <div class="col-md-8 text-white">
+        <span class="subheading" style="color:#F96D00;">By The Numbers</span>
+        <h2 class="mb-4">Our Trekking Legacy</h2>
+        <div class="row trekking-legacy">
+          <div class="col-6 col-md-3 mb-4">
+            <div class="icon-number"><span style="font-size:36px; font-weight:700;"><%= settings.stats.routes %>+</span></div>
+            <p>Routes Covered</p>
+          </div>
+          <div class="col-6 col-md-3 mb-4">
+            <div class="icon-number"><span style="font-size:36px; font-weight:700;"><%= settings.stats.travellers %>+</span></div>
+            <p>Happy Travellers</p>
+          </div>
+          <div class="col-6 col-md-3 mb-4">
+            <div class="icon-number"><span style="font-size:36px; font-weight:700;"><%= settings.stats.teams %>+</span></div>
+            <p>Mountain Teams</p>
+          </div>
+          <div class="col-6 col-md-3 mb-4">
+            <div class="icon-number"><span style="font-size:36px; font-weight:700;"><%= settings.stats.satisfaction %>%</span></div>
+            <p>Satisfaction Rate</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center pb-4">
+      <div class="col-md-8 heading-section text-center ftco-animate">
+        <span class="subheading">The Oktrek Experience</span>
+        <h2 class="mb-4">Why Trek With Us</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 text-center mb-4">
+        <div style="font-size:40px;">🧭</div>
+        <h3 class="h5 mt-2">Expert Local Guides</h3>
+        <p class="small text-muted">Certified mountain teams with deep local knowledge across routes, weather windows, and safe pacing.</p>
+      </div>
+      <div class="col-md-3 text-center mb-4">
+        <div style="font-size:40px;">🎒</div>
+        <h3 class="h5 mt-2">Transparent Planning</h3>
+        <p class="small text-muted">Clear departures, pricing, inclusions, and operations follow-up from inquiry to return drop.</p>
+      </div>
+      <div class="col-md-3 text-center mb-4">
+        <div style="font-size:40px;">🌱</div>
+        <h3 class="h5 mt-2">Responsible Travel</h3>
+        <p class="small text-muted">Trail-first itineraries built around safety, local communities, and low-impact mountain practices.</p>
+      </div>
+      <div class="col-md-3 text-center mb-4">
+        <div style="font-size:40px;">🏥</div>
+        <h3 class="h5 mt-2">Safety Support</h3>
+        <p class="small text-muted">Operations teams track every trip with practical support for high-altitude and yatra conditions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center pb-4">
+      <div class="col-md-8 heading-section text-center ftco-animate">
+        <span class="subheading">Visual Journal</span>
+        <h2 class="mb-4">Capture the Untamed</h2>
+        <p>Moments from Himalayan routes, fixed departures, and guided mountain escapes.</p>
+      </div>
+    </div>
+    <div class="row">
+      <% settings.gallery.forEach(function(img) { %>
+        <div class="col-md-4 col-6 mb-4">
+          <div style="height:220px; background-size:cover; background-position:center; border-radius:6px; background-image:url('<%= img %>');"></div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section ftco-intro ftco-no-pt">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12 text-center">
+        <div class="img" style="background-image: url(<%= settings.introBg %>);">
+          <div class="overlay"></div>
+          <h2>Ready to Write Your Own Mountain Story?</h2>
+          <p>Send an inquiry and our team will help match you to the right departure.</p>
+          <p class="mb-0"><a href="/contact#inquiry" class="btn btn-primary px-4 py-3">Book Your Trek</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>

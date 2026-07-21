@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/admin-head', { title: 'Settings' }) %></head>
+<body class="admin-body">
+<div class="admin-wrap">
+  <%- include('../partials/admin-sidebar', { active: 'settings' }) %>
+  <div class="admin-main">
+    <div class="admin-topbar"><h1>Settings</h1></div>
+
+    <% if (saved) { %><div class="alert alert-success">Saved.</div><% } %>
+    <% if (typeof pwError !== 'undefined' && pwError) { %><div class="alert alert-danger"><%= pwError %></div><% } %>
+
+    <div class="admin-card">
+      <h2 class="h5 mb-3">Site &amp; Contact Details</h2>
+      <form method="POST" action="/admin/settings" class="admin-form">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Site Name</label>
+            <input type="text" name="siteName" class="form-control" value="<%= settings.siteName %>">
+          </div>
+          <div class="col-md-6">
+            <label>Tagline (nav)</label>
+            <input type="text" name="tagline" class="form-control" value="<%= settings.tagline %>">
+          </div>
+          <div class="col-md-12">
+            <label>Sub-tagline</label>
+            <input type="text" name="subTagline" class="form-control" value="<%= settings.subTagline %>">
+          </div>
+          <div class="col-md-12">
+            <label>Address</label>
+            <input type="text" name="address" class="form-control" value="<%= settings.contact.address %>">
+          </div>
+          <div class="col-md-6">
+            <label>Phone</label>
+            <input type="text" name="phone" class="form-control" value="<%= settings.contact.phone %>">
+          </div>
+          <div class="col-md-6">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" value="<%= settings.contact.email %>">
+          </div>
+          <div class="col-md-12">
+            <label>Google Map Embed Code (optional, &lt;iframe&gt; HTML)</label>
+            <textarea name="mapEmbed" class="form-control" rows="3"><%= settings.contact.mapEmbed %></textarea>
+          </div>
+          <div class="col-md-3">
+            <label>Routes Covered</label>
+            <input type="number" name="statRoutes" class="form-control" value="<%= settings.stats.routes %>">
+          </div>
+          <div class="col-md-3">
+            <label>Happy Travellers</label>
+            <input type="number" name="statTravellers" class="form-control" value="<%= settings.stats.travellers %>">
+          </div>
+          <div class="col-md-3">
+            <label>Mountain Teams</label>
+            <input type="number" name="statTeams" class="form-control" value="<%= settings.stats.teams %>">
+          </div>
+          <div class="col-md-3">
+            <label>Satisfaction Rate (%)</label>
+            <input type="number" name="statSatisfaction" class="form-control" value="<%= settings.stats.satisfaction %>">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-admin mt-4 px-4 py-2">Save Settings</button>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <h2 class="h5 mb-3">Change Admin Password</h2>
+      <form method="POST" action="/admin/settings/password" class="admin-form">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Current Password</label>
+            <input type="password" name="currentPassword" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label>New Password</label>
+            <input type="password" name="newPassword" class="form-control" required minlength="6">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-outline-secondary mt-4 px-4 py-2">Update Password</button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

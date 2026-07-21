@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head', { title: pkg.title }) %>
+</head>
+<body>
+<%- include('partials/nav') %>
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('<%= pkg.image %>');">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+        <p class="breadcrumbs"><span class="mr-2"><a href="/">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/packages">Packages <i class="fa fa-chevron-right"></i></a></span> <span><%= pkg.title %> <i class="fa fa-chevron-right"></i></span></p>
+        <h1 class="mb-0 bread"><%= pkg.title %></h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <span class="badge-difficulty mb-3 d-inline-block"><%= pkg.difficulty %></span>
+        <h2 class="mb-3"><%= pkg.title %></h2>
+        <p class="location mb-3"><span class="fa fa-map-marker"></span> <%= pkg.location %></p>
+        <p><%= pkg.summary %></p>
+
+        <% if (pkg.itinerary && pkg.itinerary.length) { %>
+        <h4 class="mt-4 mb-3">Itinerary</h4>
+        <div class="itinerary-list">
+          <% pkg.itinerary.forEach(function(item) { %>
+          <div class="itinerary-day mb-3 p-3" style="background:#f8f8f8; border-radius:6px; border-left:4px solid #F96D00;">
+            <strong>Day <%= item.day %>: <%= item.title %></strong>
+            <p class="mb-0 mt-1" style="font-size:0.95rem;"><%= item.details %></p>
+          </div>
+          <% }) %>
+        </div>
+        <% } %>
+
+        <h4 class="mt-4 mb-2">Inclusions</h4>
+        <p><%= pkg.inclusions %></p>
+
+        <% if (pkg.exclusions) { %>
+        <h4 class="mt-4 mb-2">Exclusions</h4>
+        <p><%= pkg.exclusions %></p>
+        <% } %>
+
+        <h4 class="mt-4 mb-3">More Adventures</h4>
+        <div class="row">
+          <% related.forEach(function(r) { %>
+            <div class="col-md-4">
+              <div class="project-wrap mb-3">
+                <a href="/packages/<%= r.id %>" class="img" style="background-image: url(<%= r.image %>); height:140px;">
+                  <span class="price">₹<%= r.price.toLocaleString('en-IN') %></span>
+                </a>
+                <div class="text p-3">
+                  <h3 style="font-size:16px;"><a href="/packages/<%= r.id %>"><%= r.title %></a></h3>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="col-md-5" id="inquiry">
+        <div class="p-4" style="background:#f8f8f8; border-radius:6px;">
+          <ul class="pkg-meta-list">
+            <li><span>Duration</span><strong><%= pkg.duration %></strong></li>
+            <li><span>Region</span><strong><%= pkg.region %></strong></li>
+            <% if (pkg.minAge) { %>
+            <li><span>Min Age</span><strong><%= pkg.minAge %></strong></li>
+            <% } %>
+            <li><span>Rating</span><strong><span class="fa fa-star" style="color:#F96D00;"></span> <%= pkg.rating %></strong></li>
+            <li><span>Price</span><strong class="pkg-price-tag">₹<%= pkg.price.toLocaleString('en-IN') %></strong></li>
+          </ul>
+
+          <h4 class="mb-3">Send an Inquiry</h4>
+          <% if (submitted) { %>
+            <div class="alert alert-success">Thanks! Your inquiry has been sent — our team will reach out shortly.</div>
+          <% } %>
+          <form method="POST" action="/packages/<%= pkg.id %>/enquire">
+            <div class="form-group">
+              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
+            </div>
+            <div class="row">
+              <div class="col-6 form-group">
+                <input type="number" min="1" name="travellers" class="form-control" placeholder="Travellers">
+              </div>
+              <div class="col-6 form-group">
+                <input type="text" name="preferredDate" class="form-control" placeholder="Preferred Date" onfocus="(this.type='date')">
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" name="pickupCity" class="form-control" placeholder="Pickup City">
+            </div>
+            <div class="form-group">
+              <textarea name="message" class="form-control" rows="4" placeholder="Message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block py-3">Send Inquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/admin-head', { title: 'Contact Messages' }) %></head>
+<body class="admin-body">
+<div class="admin-wrap">
+  <%- include('../partials/admin-sidebar', { active: 'contacts' }) %>
+  <div class="admin-main">
+    <div class="admin-topbar"><h1>Contact Messages</h1></div>
+
+    <div class="admin-card">
+      <table class="admin-table">
+        <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Subject</th><th>Message</th><th></th></tr></thead>
+        <tbody>
+          <% if (!contacts.length) { %>
+            <tr><td colspan="6" class="text-muted">No messages yet.</td></tr>
+          <% } %>
+          <% contacts.forEach(function(c){ %>
+            <tr>
+              <td><%= new Date(c.createdAt).toLocaleString() %></td>
+              <td><%= c.name %></td>
+              <td><a href="mailto:<%= c.email %>"><%= c.email %></a></td>
+              <td><%= c.subject %></td>
+              <td style="max-width:300px;"><%= c.message %></td>
+              <td>
+                <form method="POST" action="/admin/contacts/<%= c.id %>/delete" onsubmit="return confirm('Delete this message?');">
+                  <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

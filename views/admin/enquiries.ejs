@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/admin-head', { title: 'Enquiries' }) %></head>
+<body class="admin-body">
+<div class="admin-wrap">
+  <%- include('../partials/admin-sidebar', { active: 'enquiries' }) %>
+  <div class="admin-main">
+    <div class="admin-topbar"><h1>Package Enquiries</h1></div>
+
+    <div class="admin-card">
+      <table class="admin-table">
+        <thead>
+          <tr><th>Date</th><th>Name</th><th>Package</th><th>Contact</th><th>Travellers</th><th>Preferred Date</th><th>Message</th><th>Status</th><th></th></tr>
+        </thead>
+        <tbody>
+          <% if (!enquiries.length) { %>
+            <tr><td colspan="9" class="text-muted">No enquiries yet.</td></tr>
+          <% } %>
+          <% enquiries.forEach(function(e){ %>
+            <tr>
+              <td><%= new Date(e.createdAt).toLocaleString() %></td>
+              <td><%= e.name %></td>
+              <td><%= e.packageTitle %></td>
+              <td><%= e.email %><br><small><%= e.phone %></small></td>
+              <td><%= e.travellers %></td>
+              <td><%= e.preferredDate %></td>
+              <td style="max-width:220px;"><%= e.message %></td>
+              <td>
+                <form method="POST" action="/admin/enquiries/<%= e.id %>/status">
+                  <select name="status" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <% ['new','contacted','closed'].forEach(function(s){ %>
+                      <option value="<%= s %>" <%= e.status === s ? 'selected' : '' %>><%= s %></option>
+                    <% }) %>
+                  </select>
+                </form>
+              </td>
+              <td>
+                <form method="POST" action="/admin/enquiries/<%= e.id %>/delete" onsubmit="return confirm('Delete this enquiry?');">
+                  <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

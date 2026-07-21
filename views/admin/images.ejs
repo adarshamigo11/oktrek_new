@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/admin-head', { title: 'Images' }) %></head>
+<body class="admin-body">
+<div class="admin-wrap">
+  <%- include('../partials/admin-sidebar', { active: 'images' }) %>
+  <div class="admin-main">
+    <div class="admin-topbar"><h1>Site Images</h1></div>
+
+    <div class="admin-card">
+      <h2 class="h5 mb-1">Logo</h2>
+      <p class="text-muted small">Upload your logo whenever it's ready — until then the site shows the text logo.</p>
+      <% if (settings.logoImage) { %>
+        <div class="mb-3"><img src="<%= settings.logoImage %>" style="max-height:60px;"></div>
+      <% } %>
+      <form method="POST" action="/admin/images/logo" enctype="multipart/form-data" class="d-flex" style="gap:10px;">
+        <input type="file" name="logo" accept="image/*" class="form-control-file">
+        <button class="btn btn-admin" type="submit">Upload Logo</button>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <h2 class="h5 mb-1">Hero / Mountain Images (3D Parallax)</h2>
+      <p class="text-muted small">These images rotate through the homepage 3D parallax hero. Add several mountain/trek photos for the best effect.</p>
+      <div class="image-grid mb-3">
+        <% settings.heroImages.forEach(function(img, i){ %>
+          <figure>
+            <img src="<%= img %>" alt="">
+            <form method="POST" action="/admin/images/hero/<%= i %>/delete" onsubmit="return confirm('Remove this image?');">
+              <button type="submit">✕</button>
+            </form>
+          </figure>
+        <% }) %>
+      </div>
+      <form method="POST" action="/admin/images/hero" enctype="multipart/form-data" class="d-flex" style="gap:10px;">
+        <input type="file" name="image" accept="image/*" class="form-control-file" required>
+        <button class="btn btn-admin" type="submit">Add Hero Image</button>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <h2 class="h5 mb-1">Gallery (Visual Journal)</h2>
+      <div class="image-grid mb-3">
+        <% settings.gallery.forEach(function(img, i){ %>
+          <figure>
+            <img src="<%= img %>" alt="">
+            <form method="POST" action="/admin/images/gallery/<%= i %>/delete" onsubmit="return confirm('Remove this image?');">
+              <button type="submit">✕</button>
+            </form>
+          </figure>
+        <% }) %>
+      </div>
+      <form method="POST" action="/admin/images/gallery" enctype="multipart/form-data" class="d-flex" style="gap:10px;">
+        <input type="file" name="image" accept="image/*" class="form-control-file" required>
+        <button class="btn btn-admin" type="submit">Add Gallery Image</button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

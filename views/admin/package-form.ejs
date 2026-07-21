@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/admin-head', { title: pkg ? 'Edit Package' : 'Add Package' }) %></head>
+<body class="admin-body">
+<div class="admin-wrap">
+  <%- include('../partials/admin-sidebar', { active: 'packages' }) %>
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <h1><%= pkg ? 'Edit Package' : 'Add Package' %></h1>
+      <a href="/admin/packages" class="btn btn-outline-secondary">Back to Packages</a>
+    </div>
+
+    <div class="admin-card">
+      <form method="POST" action="<%= pkg ? '/admin/packages/' + pkg.id + '/edit' : '/admin/packages/new' %>" enctype="multipart/form-data" class="admin-form">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Title</label>
+            <input type="text" name="title" class="form-control" value="<%= pkg ? pkg.title : '' %>" required>
+          </div>
+          <div class="col-md-6">
+            <label>Location</label>
+            <input type="text" name="location" class="form-control" value="<%= pkg ? pkg.location : '' %>" required>
+          </div>
+          <div class="col-md-4">
+            <label>Region</label>
+            <input type="text" name="region" class="form-control" value="<%= pkg ? pkg.region : '' %>" required>
+          </div>
+          <div class="col-md-4">
+            <label>Difficulty</label>
+            <select name="difficulty" class="form-control">
+              <% ['Easy','Moderate','Challenging','Strenuous','Extreme'].forEach(function(d){ %>
+                <option value="<%= d %>" <%= pkg && pkg.difficulty === d ? 'selected' : '' %>><%= d %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>Duration</label>
+            <input type="text" name="duration" class="form-control" placeholder="e.g. 6 Days" value="<%= pkg ? pkg.duration : '' %>" required>
+          </div>
+          <div class="col-md-4">
+            <label>Price (₹ per person)</label>
+            <input type="number" name="price" class="form-control" value="<%= pkg ? pkg.price : '' %>" required>
+          </div>
+          <div class="col-md-4">
+            <label>Rating (out of 5)</label>
+            <input type="number" step="0.1" min="0" max="5" name="rating" class="form-control" value="<%= pkg ? pkg.rating : '4.5' %>">
+          </div>
+          <div class="col-md-4">
+            <label>Min Age</label>
+            <input type="text" name="minAge" class="form-control" placeholder="e.g. 12 years" value="<%= pkg && pkg.minAge ? pkg.minAge : '' %>">
+          </div>
+          <div class="col-md-4 d-flex align-items-center">
+            <div class="form-check mt-4">
+              <input class="form-check-input" type="checkbox" name="featured" id="featured" <%= pkg && pkg.featured ? 'checked' : '' %>>
+              <label class="form-check-label" for="featured">Show on homepage (featured)</label>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex align-items-center">
+            <div class="form-check mt-4">
+              <input class="form-check-input" type="checkbox" name="published" id="published" <%= !pkg || pkg.published !== false ? 'checked' : '' %>>
+              <label class="form-check-label" for="published">Published (visible on site)</label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <label>Summary</label>
+            <textarea name="summary" class="form-control" rows="3"><%= pkg ? pkg.summary : '' %></textarea>
+          </div>
+          <div class="col-md-12">
+            <label>Inclusions</label>
+            <textarea name="inclusions" class="form-control" rows="2"><%= pkg ? pkg.inclusions : '' %></textarea>
+          </div>
+          <div class="col-md-12">
+            <label>Exclusions</label>
+            <textarea name="exclusions" class="form-control" rows="2"><%= pkg && pkg.exclusions ? pkg.exclusions : '' %></textarea>
+          </div>
+          <div class="col-md-12">
+            <label>Itinerary (JSON format — array of {day, title, details})</label>
+            <textarea name="itinerary" class="form-control" rows="6" placeholder='[{"day":1,"title":"Arrive","details":"Check-in and rest."}]'><%= pkg && pkg.itinerary ? JSON.stringify(pkg.itinerary, null, 2) : '' %></textarea>
+          </div>
+          <div class="col-md-12">
+            <label>Package Image</label>
+            <% if (pkg && pkg.image) { %>
+              <div><img class="current-img" src="<%= pkg.image %>" alt=""></div>
+            <% } %>
+            <input type="file" name="image" accept="image/*" class="form-control-file">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-admin mt-4 px-4 py-2"><%= pkg ? 'Save Changes' : 'Add Package' %></button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/admin-head', { title: 'Packages' }) %></head>
+<body class="admin-body">
+<div class="admin-wrap">
+  <%- include('../partials/admin-sidebar', { active: 'packages' }) %>
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <h1>Packages</h1>
+      <a href="/admin/packages/new" class="btn btn-admin">+ Add Package</a>
+    </div>
+
+    <div class="admin-card">
+      <table class="admin-table">
+        <thead><tr><th>Image</th><th>Title</th><th>Region</th><th>Difficulty</th><th>Price</th><th>Featured</th><th></th></tr></thead>
+        <tbody>
+          <% packages.forEach(function(p){ %>
+            <tr>
+              <td><img class="thumb" src="<%= p.image %>" alt=""></td>
+              <td><%= p.title %></td>
+              <td><%= p.region %></td>
+              <td><%= p.difficulty %></td>
+              <td>₹<%= p.price.toLocaleString('en-IN') %></td>
+              <td><%= p.featured ? '✅' : '—' %></td>
+              <td>
+                <a href="/admin/packages/<%= p.id %>/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <form method="POST" action="/admin/packages/<%= p.id %>/delete" style="display:inline;" onsubmit="return confirm('Delete this package?');">
+                  <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

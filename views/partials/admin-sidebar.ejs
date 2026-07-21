@@ -1,0 +1,15 @@
+<div class="admin-sidebar">
+  <div class="brand"><%= settings.siteName %> Admin<span>Control Panel</span></div>
+  <a href="/admin" class="<%= active === 'dashboard' ? 'active' : '' %>">📊 Dashboard</a>
+  <a href="/admin/packages" class="<%= active === 'packages' ? 'active' : '' %>">🏔️ Packages</a>
+  <a href="/admin/images" class="<%= active === 'images' ? 'active' : '' %>">🖼️ Images</a>
+  <a href="/admin/enquiries" class="<%= active === 'enquiries' ? 'active' : '' %>">📩 Enquiries</a>
+  <a href="/admin/contacts" class="<%= active === 'contacts' ? 'active' : '' %>">✉️ Contact Messages</a>
+  <a href="/admin/settings" class="<%= active === 'settings' ? 'active' : '' %>">⚙️ Settings</a>
+  <a href="/" target="_blank">🌐 View Site</a>
+  <div class="logout-form">
+    <form method="POST" action="/admin/logout">
+      <button type="submit">Log Out</button>
+    </form>
+  </div>
+</div>

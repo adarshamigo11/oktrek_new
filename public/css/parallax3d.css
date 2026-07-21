@@ -1,0 +1,64 @@
+/* ===== 3D Parallax Hero ===== */
+.hero-parallax {
+  position: relative;
+  height: 88vh;
+  min-height: 560px;
+  overflow: hidden;
+  perspective: 1200px;
+  background: #0b0f13;
+}
+
+.hero-parallax .p3d-layer {
+  position: absolute;
+  top: -6%;
+  left: -6%;
+  width: 112%;
+  height: 112%;
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+}
+
+.hero-parallax .p3d-layer.p3d-active {
+  opacity: 1;
+}
+
+.hero-parallax .p3d-layer {
+  opacity: 0;
+  transition: opacity 1.1s ease-in-out, transform 0.15s ease-out;
+}
+
+.hero-parallax .p3d-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10,15,20,.35) 0%, rgba(10,15,20,.55) 55%, rgba(10,15,20,.85) 100%);
+  z-index: 2;
+}
+
+.hero-parallax .p3d-content {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  transform: translateZ(60px);
+}
+
+.hero-parallax .p3d-fg {
+  position: absolute;
+  bottom: -4%;
+  left: -4%;
+  width: 108%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: .9;
+  will-change: transform;
+  transition: transform 0.15s ease-out;
+}
+
+@media (max-width: 767px) {
+  .hero-parallax { height: 70vh; min-height: 460px; perspective: none; }
+  .hero-parallax .p3d-layer { transition: none; }
+}

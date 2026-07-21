@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head', { title: 'Treks & Packages' }) %>
+</head>
+<body>
+<%- include('partials/nav') %>
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('<%= settings.heroImages[0] %>');">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+        <p class="breadcrumbs"><span class="mr-2"><a href="/">Home <i class="fa fa-chevron-right"></i></a></span> <span>Treks &amp; Packages <i class="fa fa-chevron-right"></i></span></p>
+        <h1 class="mb-0 bread">Treks &amp; Packages</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="filter-bar">
+      <form method="GET" action="/packages" class="row align-items-end">
+        <div class="col-md-3">
+          <label>Region</label>
+          <select name="region" class="form-control">
+            <option value="">All regions</option>
+            <% regions.forEach(function(r){ %>
+              <option value="<%= r %>" <%= query.region === r ? 'selected' : '' %>><%= r %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label>Difficulty</label>
+          <select name="difficulty" class="form-control">
+            <option value="">Any difficulty</option>
+            <% difficulties.forEach(function(d){ %>
+              <option value="<%= d %>" <%= query.difficulty === d ? 'selected' : '' %>><%= d %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label>Sort</label>
+          <select name="sort" class="form-control">
+            <option value="">Featured</option>
+            <option value="price_asc" <%= query.sort==='price_asc'?'selected':'' %>>Price low to high</option>
+            <option value="price_desc" <%= query.sort==='price_desc'?'selected':'' %>>Price high to low</option>
+            <option value="rating" <%= query.sort==='rating'?'selected':'' %>>Highest rated</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-primary btn-block">Filter</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="row">
+      <% if (!packages.length) { %>
+        <div class="col-12 text-center py-5">
+          <p class="text-muted">No treks match those filters yet. Try a different combination.</p>
+        </div>
+      <% } %>
+      <% packages.forEach(function(pkg) { %>
+        <div class="col-md-4 ftco-animate mb-4">
+          <div class="project-wrap">
+            <a href="/packages/<%= pkg.id %>" class="img" style="background-image: url(<%= pkg.image %>);">
+              <span class="price">₹<%= pkg.price.toLocaleString('en-IN') %>/person</span>
+            </a>
+            <div class="text p-4">
+              <span class="days"><%= pkg.duration %> · <span class="badge-difficulty"><%= pkg.difficulty %></span></span>
+              <h3><a href="/packages/<%= pkg.id %>"><%= pkg.title %></a></h3>
+              <p class="location"><span class="fa fa-map-marker"></span> <%= pkg.location %></p>
+              <p class="rating"><span class="fa fa-star" style="color:#F96D00;"></span> <%= pkg.rating %> rating</p>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>

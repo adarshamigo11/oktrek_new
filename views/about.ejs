@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head', { title: 'About Us' }) %>
+</head>
+<body>
+<%- include('partials/nav') %>
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('<%= settings.heroImages[1] || settings.heroImages[0] %>');">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+        <p class="breadcrumbs"><span class="mr-2"><a href="/">Home <i class="fa fa-chevron-right"></i></a></span> <span>About us <i class="fa fa-chevron-right"></i></span></p>
+        <h1 class="mb-0 bread">About Us</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section ftco-about ftco-no-pt img">
+  <div class="container">
+    <div class="row d-flex">
+      <div class="col-md-12 about-intro">
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-stretch">
+            <div class="img d-flex w-100 align-items-center justify-content-center" style="background-image:url(<%= settings.aboutImage %>);"></div>
+          </div>
+          <div class="col-md-6 pl-md-5 py-5">
+            <div class="row justify-content-start pb-3">
+              <div class="col-md-12 heading-section ftco-animate">
+                <span class="subheading">About Us</span>
+                <h2 class="mb-4">Guided Himalayan Journeys, Done Right</h2>
+                <p><%= settings.siteName %> plans and runs guided Himalayan treks and yatra escapes with fixed departures, transparent pricing, and an operations team that follows every inquiry from first call to return drop.</p>
+                <p>Our certified local guides know the routes, the weather windows, and how to pace a group safely — so you can focus on the trail ahead.</p>
+                <p><a href="/packages" class="btn btn-primary">Browse Treks</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center pb-4">
+      <div class="col-md-8 heading-section text-center ftco-animate">
+        <span class="subheading">The <%= settings.siteName %> Experience</span>
+        <h2 class="mb-4">Why Trek With Us</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 text-center mb-4">
+        <div style="font-size:40px;">🧭</div>
+        <h3 class="h5 mt-2">Expert Local Guides</h3>
+        <p class="small text-muted">Deep local knowledge across routes, weather windows, and safe pacing.</p>
+      </div>
+      <div class="col-md-3 text-center mb-4">
+        <div style="font-size:40px;">🎒</div>
+        <h3 class="h5 mt-2">Transparent Planning</h3>
+        <p class="small text-muted">Clear departures, pricing, and operations follow-up.</p>
+      </div>
+      <div class="col-md-3 text-center mb-4">
+        <div style="font-size:40px;">🌱</div>
+        <h3 class="h5 mt-2">Responsible Travel</h3>
+        <p class="small text-muted">Safety, local communities, and low-impact mountain practices.</p>
+      </div>
+      <div class="col-md-3 text-center mb-4">
+        <div style="font-size:40px;">🏥</div>
+        <h3 class="h5 mt-2">Safety Support</h3>
+        <p class="small text-muted">Practical support for high-altitude and yatra conditions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section ftco-intro ftco-no-pt">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12 text-center">
+        <div class="img" style="background-image: url(<%= settings.introBg %>);">
+          <div class="overlay"></div>
+          <h2>We Are <%= settings.siteName %></h2>
+          <p><%= settings.subTagline %></p>
+          <p class="mb-0"><a href="/contact" class="btn btn-primary px-4 py-3">Ask For A Quote</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>
