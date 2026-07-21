@@ -133,7 +133,7 @@ app.post('/packages/:id/enquire', async (req, res, next) => {
       message: req.body.message || '',
       status: 'new'
     });
-    res.redirect(`/packages/${pkg.id}?sent=1`);
+    res.redirect(303, `/packages/${pkg.id}?sent=1`);
   } catch (err) { next(err); }
 });
 
@@ -153,7 +153,7 @@ app.post('/contact', async (req, res, next) => {
       subject: req.body.subject || '',
       message: req.body.message || ''
     });
-    res.redirect('/contact?sent=1');
+    res.redirect(303, '/contact?sent=1');
   } catch (err) { next(err); }
 });
 
@@ -176,12 +176,12 @@ app.post('/admin/login', async (req, res, next) => {
     }
     req.session.isAdmin = true;
     req.session.adminUsername = username;
-    res.redirect('/admin');
+    res.redirect(303, '/admin');
   } catch (err) { next(err); }
 });
 
 app.post('/admin/logout', (req, res) => {
-  req.session.destroy(() => res.redirect('/admin/login'));
+  req.session.destroy(() => res.redirect(303, '/admin/login'));
 });
 
 app.get('/admin', requireAdmin, async (req, res, next) => {
@@ -242,7 +242,7 @@ app.post('/admin/packages/new', requireAdmin, uploadPackage.single('image'), asy
       featured: b.featured === 'on',
       published: b.published === 'on'
     });
-    res.redirect('/admin/packages');
+    res.redirect(303, '/admin/packages');
   } catch (err) { next(err); }
 });
 
@@ -279,14 +279,14 @@ app.post('/admin/packages/:id/edit', requireAdmin, uploadPackage.single('image')
     };
     if (req.file) update.image = `/uploads/packages/${req.file.filename}`;
     await Package.findByIdAndUpdate(req.params.id, update);
-    res.redirect('/admin/packages');
+    res.redirect(303, '/admin/packages');
   } catch (err) { next(err); }
 });
 
 app.post('/admin/packages/:id/delete', requireAdmin, async (req, res, next) => {
   try {
     await Package.findByIdAndDelete(req.params.id);
-    res.redirect('/admin/packages');
+    res.redirect(303, '/admin/packages');
   } catch (err) { next(err); }
 });
 
@@ -303,7 +303,7 @@ app.post('/admin/images/hero', requireAdmin, uploadHero.single('image'), async (
     if (req.file) {
       await Settings.findOneAndUpdate({}, { $push: { heroImages: `/uploads/hero/${req.file.filename}` } });
     }
-    res.redirect('/admin/images');
+    res.redirect(303, '/admin/images');
   } catch (err) { next(err); }
 });
 
@@ -312,7 +312,7 @@ app.post('/admin/images/hero/:index/delete', requireAdmin, async (req, res, next
     const settings = await Settings.findOne();
     settings.heroImages.splice(Number(req.params.index), 1);
     await settings.save();
-    res.redirect('/admin/images');
+    res.redirect(303, '/admin/images');
   } catch (err) { next(err); }
 });
 
@@ -321,7 +321,7 @@ app.post('/admin/images/gallery', requireAdmin, uploadGallery.single('image'), a
     if (req.file) {
       await Settings.findOneAndUpdate({}, { $push: { gallery: `/uploads/gallery/${req.file.filename}` } });
     }
-    res.redirect('/admin/images');
+    res.redirect(303, '/admin/images');
   } catch (err) { next(err); }
 });
 
@@ -330,7 +330,7 @@ app.post('/admin/images/gallery/:index/delete', requireAdmin, async (req, res, n
     const settings = await Settings.findOne();
     settings.gallery.splice(Number(req.params.index), 1);
     await settings.save();
-    res.redirect('/admin/images');
+    res.redirect(303, '/admin/images');
   } catch (err) { next(err); }
 });
 
@@ -339,7 +339,7 @@ app.post('/admin/images/logo', requireAdmin, uploadLogo.single('logo'), async (r
     if (req.file) {
       await Settings.findOneAndUpdate({}, { logoImage: `/uploads/logo/${req.file.filename}` });
     }
-    res.redirect('/admin/images');
+    res.redirect(303, '/admin/images');
   } catch (err) { next(err); }
 });
 
@@ -354,14 +354,14 @@ app.get('/admin/enquiries', requireAdmin, async (req, res, next) => {
 app.post('/admin/enquiries/:id/status', requireAdmin, async (req, res, next) => {
   try {
     await Enquiry.findByIdAndUpdate(req.params.id, { status: req.body.status });
-    res.redirect('/admin/enquiries');
+    res.redirect(303, '/admin/enquiries');
   } catch (err) { next(err); }
 });
 
 app.post('/admin/enquiries/:id/delete', requireAdmin, async (req, res, next) => {
   try {
     await Enquiry.findByIdAndDelete(req.params.id);
-    res.redirect('/admin/enquiries');
+    res.redirect(303, '/admin/enquiries');
   } catch (err) { next(err); }
 });
 
@@ -376,7 +376,7 @@ app.get('/admin/contacts', requireAdmin, async (req, res, next) => {
 app.post('/admin/contacts/:id/delete', requireAdmin, async (req, res, next) => {
   try {
     await Contact.findByIdAndDelete(req.params.id);
-    res.redirect('/admin/contacts');
+    res.redirect(303, '/admin/contacts');
   } catch (err) { next(err); }
 });
 
@@ -404,7 +404,7 @@ app.post('/admin/settings', requireAdmin, async (req, res, next) => {
       'stats.teams': Number(b.statTeams) || 0,
       'stats.satisfaction': Number(b.statSatisfaction) || 0
     });
-    res.redirect('/admin/settings?saved=1');
+    res.redirect(303, '/admin/settings?saved=1');
   } catch (err) { next(err); }
 });
 
@@ -418,7 +418,7 @@ app.post('/admin/settings/password', requireAdmin, async (req, res, next) => {
     }
     admin.passwordHash = bcrypt.hashSync(newPassword, 10);
     await admin.save();
-    res.redirect('/admin/settings?saved=1');
+    res.redirect(303, '/admin/settings?saved=1');
   } catch (err) { next(err); }
 });
 
