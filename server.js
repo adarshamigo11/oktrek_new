@@ -42,7 +42,7 @@ app.use(async (req, res, next) => {
 // ---------- Multer upload config ----------
 function makeUploader(subfolder) {
   const dir = path.join(__dirname, 'public', 'uploads', subfolder);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  try { if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true }); } catch(e) { /* read-only env (Vercel) */ }
   const storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, dir),
     filename: (req, file, cb) => {
