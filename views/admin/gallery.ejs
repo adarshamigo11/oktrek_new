@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/admin-head', { title: 'Gallery' }) %></head>
+<body class="admin-body">
+<div class="admin-wrap">
+  <%- include('../partials/admin-sidebar', { active: 'gallery' }) %>
+  <div class="admin-main">
+    <div class="admin-topbar"><h1>Gallery Manager</h1></div>
+
+    <div class="admin-card">
+      <h2 class="h5 mb-1">Upload Image</h2>
+      <p class="text-muted small">Upload a gallery image with an optional caption. Images are stored on Cloudinary CDN.</p>
+      <form method="POST" action="/admin/gallery/upload" enctype="multipart/form-data">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Image</label>
+            <input type="file" name="image" accept="image/*" class="form-control-file" required>
+          </div>
+          <div class="col-md-6">
+            <label>Caption</label>
+            <input type="text" name="caption" class="form-control" placeholder="Enter a caption for this image">
+          </div>
+        </div>
+        <button class="btn btn-admin mt-3" type="submit">Upload to Gallery</button>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <h2 class="h5 mb-3">Gallery Images (<%= images.length %>)</h2>
+      <% if (!images.length) { %>
+        <p class="text-muted">No gallery images yet. Upload your first image above.</p>
+      <% } else { %>
+        <div class="gallery-admin-grid">
+          <% images.forEach(function(img) { %>
+            <div class="gallery-admin-item">
+              <img src="<%= img.imageUrl %>" alt="<%= img.caption %>">
+              <div class="gallery-admin-caption"><%= img.caption || 'No caption' %></div>
+              <form method="POST" action="/admin/gallery/<%= img.id %>/delete" onsubmit="return confirm('Delete this image?');">
+                <button type="submit" class="btn btn-sm btn-danger mt-2">Delete</button>
+              </form>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+<style>
+.gallery-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.gallery-admin-item {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 10px;
+}
+.gallery-admin-item img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+.gallery-admin-caption {
+  padding: 8px 10px 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+</style>
+</body>
+</html>

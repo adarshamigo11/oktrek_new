@@ -87,6 +87,16 @@ const contactSchema = new mongoose.Schema({
 });
 const Contact = mongoose.model('Contact', contactSchema);
 
+// ---- Gallery Image ----
+const gallerySchema = new mongoose.Schema({
+  imageUrl: { type: String, required: true },
+  caption: { type: String, default: '' },
+  cloudinaryPublicId: { type: String, default: '' },
+  order: { type: Number, default: 0 },
+  createdAt: { type: Date, default: Date.now }
+});
+const Gallery = mongoose.model('Gallery', gallerySchema);
+
 // ---- Counter (for auto-incrementing IDs) ----
 const counterSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
@@ -103,4 +113,4 @@ async function getNextSeq(name) {
   return counter.seq;
 }
 
-module.exports = { Admin, Settings, Package, Enquiry, Contact, Counter, getNextSeq };
+module.exports = { Admin, Settings, Package, Enquiry, Contact, Gallery, Counter, getNextSeq };

@@ -6,8 +6,16 @@ const multer = require('multer');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
-const { Admin, Settings, Package, Enquiry, Contact, getNextSeq } = require('./models');
+const cloudinary = require('cloudinary').v2;
+const { Admin, Settings, Package, Enquiry, Contact, Gallery, getNextSeq } = require('./models');
 const { requireAdmin } = require('./middleware/auth');
+
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -139,6 +147,13 @@ app.post('/packages/:id/enquire', async (req, res, next) => {
 
 app.get('/about', (req, res) => {
   res.render('about', { page: 'about' });
+});
+
+app.get('/gallery', async (req, res, next) => {
+  try {
+    const images = await Gallery.find().sort({ order: 1, createdAt: -1 });
+    res.render('gallery', { page: 'gallery', images });
+  } catch (err) { next(err); }
 });
 
 app.get('/contact', (req, res) => {
@@ -340,6 +355,45 @@ app.post('/admin/images/logo', requireAdmin, uploadLogo.single('logo'), async (r
       await Settings.findOneAndUpdate({}, { logoImage: `/uploads/logo/${req.file.filename}` });
     }
     res.redirect(303, '/admin/images');
+  } catch (err) { next(err); }
+});
+
+// ---- Gallery Management (Admin) ----
+app.get('/admin/gallery', requireAdmin, async (req, res, next) => {
+  try {
+    const images = await Gallery.find().sort({ order: 1, createdAt: -1 });
+    res.render('admin/gallery', { page: 'admin', images });
+  } catch (err) { next(err); }
+});
+
+app.post('/admin/gallery/upload', requireAdmin, uploadGallery.single('image'), async (req, res, next) => {
+  try {
+    const caption = req.body.caption || '';
+    if (!req.file) return res.redirect(303, '/admin/gallery');
+    // Upload to Cloudinary
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: 'oktrek-gallery',
+      transformation: [{ width: 800, height: 600, crop: 'limit' }]
+    });
+    // Save to MongoDB
+    await Gallery.create({
+      imageUrl: result.secure_url,
+      caption,
+      cloudinaryPublicId: result.public_id,
+      order: Date.now()
+    });
+    res.redirect(303, '/admin/gallery');
+  } catch (err) { next(err); }
+});
+
+app.post('/admin/gallery/:id/delete', requireAdmin, async (req, res, next) => {
+  try {
+    const image = await Gallery.findById(req.params.id);
+    if (image && image.cloudinaryPublicId) {
+      await cloudinary.uploader.destroy(image.cloudinaryPublicId);
+    }
+    await Gallery.findByIdAndDelete(req.params.id);
+    res.redirect(303, '/admin/gallery');
   } catch (err) { next(err); }
 });
 
