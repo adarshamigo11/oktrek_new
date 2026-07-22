@@ -96,3 +96,108 @@
 .image-grid figure { margin: 0; position: relative; }
 .image-grid img { width: 100%; height: 100px; object-fit: cover; border-radius: 6px; }
 .image-grid button { position: absolute; top: 4px; right: 4px; background: rgba(0,0,0,.6); color: #fff; border: none; border-radius: 50%; width: 22px; height: 22px; font-size: 12px; cursor: pointer; }
+
+/* =====================================================
+   MARKETING SECTIONS (richer public content)
+===================================================== */
+.section-intro-text { max-width: 760px; margin: 0 auto; color: #666; }
+.bg-light-soft { background: #f7f7f9; }
+
+/* How it works steps */
+.step-card { text-align: center; padding: 20px 16px; }
+.step-card .step-num { width: 66px; height: 66px; line-height: 66px; border-radius: 50%; background: #FFF1E6; color: #F96D00; font-size: 26px; font-weight: 700; margin: 0 auto 16px; }
+.step-card h3 { font-size: 18px; margin-bottom: 8px; }
+.step-card p { color: #777; font-size: 14.5px; }
+
+/* Region cards */
+.region-card { position: relative; display: block; border-radius: 10px; overflow: hidden; height: 260px; box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+.region-card .bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .5s ease; }
+.region-card:hover .bg { transform: scale(1.08); }
+.region-card .region-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.78), rgba(0,0,0,.05)); }
+.region-card .region-label { position: absolute; left: 22px; bottom: 18px; right: 22px; color: #fff; z-index: 2; }
+.region-card .region-label h3 { color: #fff; margin: 0 0 2px; font-size: 22px; }
+.region-card .region-label span { font-size: 13px; opacity: .88; }
+
+/* Value / feature cards */
+.value-card { background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 26px 24px; height: 100%; transition: box-shadow .3s ease, transform .3s ease; }
+.value-card:hover { box-shadow: 0 12px 30px rgba(0,0,0,.09); transform: translateY(-4px); }
+.value-card .vc-icon { font-size: 34px; margin-bottom: 12px; }
+.value-card h3 { font-size: 18px; margin-bottom: 8px; }
+.value-card p { color: #777; font-size: 14.5px; margin: 0; }
+
+/* Testimonials */
+.testimonial-card { background: #fff; border-radius: 10px; padding: 28px 26px; box-shadow: 0 6px 24px rgba(0,0,0,.06); height: 100%; }
+.testimonial-card .stars { color: #F96D00; margin-bottom: 12px; letter-spacing: 2px; }
+.testimonial-card .quote { font-style: italic; color: #555; line-height: 1.7; }
+.testimonial-card .person { display: flex; align-items: center; margin-top: 18px; }
+.testimonial-card .person .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; margin-right: 12px; }
+.testimonial-card .person strong { display: block; font-size: 14px; }
+.testimonial-card .person span { font-size: 12px; color: #999; }
+
+/* FAQ (native accordion) */
+.faq-item { background: #fff; border: 1px solid #eee; border-radius: 8px; margin-bottom: 14px; }
+.faq-item summary { cursor: pointer; padding: 18px 48px 18px 20px; font-weight: 600; list-style: none; position: relative; outline: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: #F96D00; font-size: 24px; line-height: 1; }
+.faq-item[open] summary::after { content: '\2212'; }
+.faq-item .faq-body { padding: 0 20px 18px; color: #666; font-size: 14.5px; line-height: 1.7; }
+
+/* Timeline */
+.timeline { list-style: none; padding: 0; margin: 0; position: relative; }
+.timeline:before { content: ''; position: absolute; left: 15px; top: 6px; bottom: 6px; width: 2px; background: #f0e0d3; }
+.timeline li { position: relative; padding: 0 0 26px 52px; }
+.timeline li .dot { position: absolute; left: 6px; top: 2px; width: 20px; height: 20px; border-radius: 50%; background: #F96D00; border: 4px solid #FFF1E6; }
+.timeline li h4 { font-size: 16px; margin: 0 0 4px; }
+.timeline li p { margin: 0; color: #6c6c6c; font-size: 14px; }
+
+/* Next-step numbers (contact) */
+.next-step { text-align: center; padding: 16px; }
+.next-step .ns-num { display: inline-block; width: 58px; height: 58px; line-height: 58px; border-radius: 50%; background: #FFF1E6; color: #F96D00; font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+.next-step h3 { font-size: 16px; margin-bottom: 6px; }
+.next-step p { color: #777; font-size: 14px; margin: 0; }
+
+/* Info list (contact hours) */
+.hours-list { list-style: none; padding: 0; margin: 0; }
+.hours-list li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #e2e2e2; font-size: 14.5px; }
+.hours-list li:last-child { border-bottom: none; }
+.hours-list li span:last-child { color: #F96D00; font-weight: 600; }
+
+/* =====================================================
+   MOBILE RESPONSIVENESS
+===================================================== */
+@media (max-width: 1199.98px) {
+  .hero-parallax .p3d-content h1 { font-size: 44px !important; }
+}
+@media (max-width: 991.98px) {
+  .hero-parallax .p3d-content h1 { font-size: 38px !important; }
+  .hero-parallax .p3d-content p { font-size: 17px !important; }
+  .about-intro .col-md-6 .img { min-height: 320px; }
+}
+@media (max-width: 767.98px) {
+  .ftco-section { padding: 3.5em 0; }
+  .hero-parallax { min-height: 88vh; }
+  .hero-parallax .p3d-content h1 { font-size: 30px !important; }
+  .hero-parallax .p3d-content p { font-size: 15.5px !important; }
+  .hero-parallax .p3d-content .btn { display: block; width: 100%; margin: 0 0 12px 0 !important; }
+  /* fixed backgrounds jump on mobile — use scroll */
+  .hero-wrap, .ftco-about.img, .ftco-intro .img { background-attachment: scroll !important; }
+  .slider-text .breadcrumbs { font-size: 13.5px; }
+  .filter-bar { padding: 18px; }
+  .filter-bar .col-md-3 { margin-bottom: 12px; }
+  .filter-bar .col-md-3:last-child { margin-bottom: 0; }
+  .ftco-footer .border-left { border-left: none !important; }
+  .ftco-footer .ftco-footer-widget.ml-md-5 { margin-left: 0 !important; }
+  .region-card { height: 210px; }
+  .gallery-admin-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .contact-info .box { padding: 24px !important; }
+  .block-9 .contact-form { padding: 28px !important; }
+}
+@media (max-width: 575.98px) {
+  h2 { font-size: 25px; }
+  .heading-section h2 { font-size: 25px; }
+  .pkg-price-tag { font-size: 26px; }
+  .testimonial-card, .value-card { padding: 22px 20px; }
+  .admin-wrap { flex-direction: column; }
+  .admin-sidebar { width: 100%; }
+  .admin-main { padding: 20px 16px; }
+}

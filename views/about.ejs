@@ -9,10 +9,11 @@
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('<%= settings.heroImages[1] || settings.heroImages[0] %>');">
   <div class="overlay"></div>
   <div class="container">
-    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
-      <div class="col-md-9 ftco-animate pb-5 text-center">
+    <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate text-center">
         <p class="breadcrumbs"><span class="mr-2"><a href="/">Home <i class="fa fa-chevron-right"></i></a></span> <span>About us <i class="fa fa-chevron-right"></i></span></p>
         <h1 class="mb-0 bread">About Us</h1>
+        <p class="mt-3 mb-0" style="font-size:18px; color:rgba(255,255,255,.9);">Guided Himalayan treks and yatra journeys, planned with care and run with heart.</p>
       </div>
     </div>
   </div>
@@ -37,6 +38,81 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OUR STORY + TIMELINE ===== -->
+<section class="ftco-section bg-light-soft">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 ftco-animate">
+        <span class="subheading">Our Story</span>
+        <h2 class="mb-4">From a Shared Love of the Mountains</h2>
+        <p>What began as a small circle of friends chasing sunrises above the clouds has grown into a full-fledged mountain travel company. We started <%= settings.siteName %> because we were tired of rushed, one-size-fits-all trips that treated the Himalaya like a checklist. We wanted journeys that respect the mountain, the pace of the walker, and the culture of the villages we pass through.</p>
+        <p>Today we run fixed-departure treks and sacred yatra routes across the Indian Himalaya. Every itinerary is walked and tested by our own team before it is offered to you, so the days, distances, and rest points are realistic — not just numbers on a brochure.</p>
+        <p>We stay small on purpose. Smaller groups mean safer trails, warmer campfires, and guides who actually remember your name.</p>
+      </div>
+      <div class="col-lg-6 pl-lg-5 ftco-animate mt-4 mt-lg-0">
+        <ul class="timeline">
+          <li><span class="dot"></span><h4>It started on a trail</h4><p>A group of friends kept coming back to the same ridgelines — and started guiding others to them.</p></li>
+          <li><span class="dot"></span><h4>First fixed departures</h4><p>We published transparent dates and pricing so anyone could join without haggling or hidden costs.</p></li>
+          <li><span class="dot"></span><h4>Yatra routes added</h4><p>We expanded into guided pilgrimage journeys with the same safety-first, well-paced approach.</p></li>
+          <li><span class="dot"></span><h4>Where we are today</h4><p>Thousands of happy trekkers later, we still plan every trip like it's our own first summit.</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MISSION / VALUES ===== -->
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center pb-4">
+      <div class="col-md-8 heading-section text-center ftco-animate">
+        <span class="subheading">What We Stand For</span>
+        <h2 class="mb-3">Our Guiding Values</h2>
+        <p class="section-intro-text">These aren't just words on a wall — they shape every route we design and every group we lead into the hills.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-4 mb-4 ftco-animate">
+        <div class="value-card"><div class="vc-icon">🛡️</div><h3>Safety First, Always</h3><p>Well-paced acclimatisation, trained guides, first-aid readiness, and honest weather calls. If a summit isn't safe, we don't push it.</p></div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-4 ftco-animate">
+        <div class="value-card"><div class="vc-icon">🤝</div><h3>Total Transparency</h3><p>Clear inclusions, no surprise charges, and a real person to talk to from your first inquiry until you're safely back home.</p></div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-4 ftco-animate">
+        <div class="value-card"><div class="vc-icon">🏔️</div><h3>Respect the Mountain</h3><p>Leave-no-trace camps, local hiring, and small groups that tread lightly on fragile high-altitude trails.</p></div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-4 ftco-animate">
+        <div class="value-card"><div class="vc-icon">📍</div><h3>Deep Local Roots</h3><p>Our guides are from the ranges they lead in. That means better stories, better food stops, and safer decisions.</p></div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-4 ftco-animate">
+        <div class="value-card"><div class="vc-icon">🌱</div><h3>Responsible Travel</h3><p>We support the communities that host us and keep our footprint small so these places stay wild for the next walker.</p></div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-4 ftco-animate">
+        <div class="value-card"><div class="vc-icon">❤️</div><h3>Genuine Hospitality</h3><p>Warm meals, real conversations, and a team that treats every trekker like part of the family.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS BAND ===== -->
+<section class="ftco-section ftco-about ftco-no-pt img" style="background-image: url(<%= settings.introBg %>);">
+  <div class="overlay"></div>
+  <div class="container py-md-5">
+    <div class="row py-md-5 justify-content-center text-center">
+      <div class="col-md-8 text-white">
+        <span class="subheading" style="color:#F96D00;">By The Numbers</span>
+        <h2 class="mb-4">A Legacy Built Trail by Trail</h2>
+        <div class="row trekking-legacy">
+          <div class="col-6 col-md-3 mb-4"><div class="icon-number"><span style="font-size:36px; font-weight:700;"><%= settings.stats.routes %>+</span></div><p>Routes Covered</p></div>
+          <div class="col-6 col-md-3 mb-4"><div class="icon-number"><span style="font-size:36px; font-weight:700;"><%= settings.stats.travellers %>+</span></div><p>Happy Travellers</p></div>
+          <div class="col-6 col-md-3 mb-4"><div class="icon-number"><span style="font-size:36px; font-weight:700;"><%= settings.stats.teams %>+</span></div><p>Mountain Teams</p></div>
+          <div class="col-6 col-md-3 mb-4"><div class="icon-number"><span style="font-size:36px; font-weight:700;"><%= settings.stats.satisfaction %>%</span></div><p>Satisfaction Rate</p></div>
         </div>
       </div>
     </div>
@@ -71,6 +147,42 @@
         <div style="font-size:40px;">🏥</div>
         <h3 class="h5 mt-2">Safety Support</h3>
         <p class="small text-muted">Practical support for high-altitude and yatra conditions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="ftco-section bg-light-soft">
+  <div class="container">
+    <div class="row justify-content-center pb-4">
+      <div class="col-md-8 heading-section text-center ftco-animate">
+        <span class="subheading">Trekker Stories</span>
+        <h2 class="mb-3">Loved by People Who Walked With Us</h2>
+        <p class="section-intro-text">Don't just take our word for it — here's what recent travellers had to say after coming down from the hills.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-4 ftco-animate">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">“The pacing was spot on and our guide felt like an old friend by day two. I never once felt unsafe, even on the tough sections. Easily my best mountain trip.”</p>
+          <div class="person"><img src="/images/person_1.jpg" class="avatar" alt="Aditi"><div><strong>Aditi Sharma</strong><span>Kedarkantha Trek</span></div></div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4 ftco-animate">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">“Everything was transparent from the first call — no hidden costs, clear itinerary, and the team checked in on us the whole way. Highly recommend.”</p>
+          <div class="person"><img src="/images/person_2.jpg" class="avatar" alt="Rahul"><div><strong>Rahul Verma</strong><span>Char Dham Yatra</span></div></div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4 ftco-animate">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">“Small group, warm food, and sunrises I'll never forget. You can tell these people genuinely love the mountains. I'm already booking my next trek.”</p>
+          <div class="person"><img src="/images/person_3.jpg" class="avatar" alt="Meera"><div><strong>Meera Nair</strong><span>Spiti Valley Expedition</span></div></div>
+        </div>
       </div>
     </div>
   </div>
