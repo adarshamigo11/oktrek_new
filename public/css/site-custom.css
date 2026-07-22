@@ -163,6 +163,30 @@
 .hours-list li span:last-child { color: #F96D00; font-weight: 600; }
 
 /* =====================================================
+   FOOTER — blur background so content stays readable
+===================================================== */
+.ftco-footer { position: relative; overflow: hidden; }
+.ftco-footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: inherit;
+  background-size: cover;
+  background-position: center bottom;
+  filter: blur(7px);
+  transform: scale(1.08);
+  z-index: -2;
+}
+.ftco-footer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.86);
+  z-index: -1;
+}
+.ftco-footer .container { position: relative; z-index: 1; }
+
+/* =====================================================
    MOBILE RESPONSIVENESS
 ===================================================== */
 @media (max-width: 1199.98px) {
